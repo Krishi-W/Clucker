@@ -10,7 +10,6 @@ class Command(BaseCommand):
         self.faker = Faker('en_GB')
 
     def handle(self, *args, **options):
-        print("WARNING: The SEED command has not been implemented yet.")
         for x in range(100):
             username = self.faker.unique.name()
             first_name = self.faker.first_name()
@@ -27,3 +26,5 @@ class Command(BaseCommand):
                 password=password,
                 bio=bio
             ).save()
+        
+        print("100 random users seeded successfully")
