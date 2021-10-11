@@ -145,3 +145,6 @@ class UserModelTestCase(TestCase):
         )
 
         return user
+
+class PostModelTestCase(TestCase):
+    pass

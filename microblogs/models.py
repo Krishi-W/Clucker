@@ -37,11 +37,13 @@ class User(AbstractUser):
 class Post(models.Model):
     author = models.ForeignKey(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=False
     )
     
     text = models.CharField(
-        max_length=280
+        max_length=280,
+        blank=False
     )
     
     created_at = models.DateTimeField(
