@@ -38,11 +38,13 @@ class Post(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        unique=False,
         blank=False
     )
     
     text = models.CharField(
         max_length=280,
+        unique=False,
         blank=False
     )
     
