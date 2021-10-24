@@ -1,6 +1,6 @@
 from django.contrib import auth
 from django.shortcuts import redirect, render
-from microblogs.forms import LogInForm, SignUpForm
+from microblogs.forms import LogInForm, PostForm, SignUpForm
 
 from django.contrib import messages
 
@@ -9,7 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def feed(request):
-    return render(request, 'feed.html')
+    form = PostForm()
+    return render(request, 'feed.html', {"form": form})
 
 def log_in(request):
     if request.method == "POST":

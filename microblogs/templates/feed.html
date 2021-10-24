@@ -4,6 +4,10 @@
   </head>
   <body>
     <h1>Feed</h1>
-    <p>UNDER CONSTRUCTION</p>
+    <p>Make a Cluck</p>
+    <form action="#", method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Post">
   </body>
 </html>
