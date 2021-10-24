@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.shortcuts import redirect, render
 from microblogs.forms import LogInForm, SignUpForm
 
@@ -29,7 +30,8 @@ def sign_up(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             return redirect("feed")
     else:
         form = SignUpForm()
