@@ -6,6 +6,9 @@ from microblogs.forms import SignUpForm
 def feed(request):
     return render(request, 'feed.html')
 
+def log_in(request):
+    return render(request, 'log_in.html')
+
 def home(request):
     return render(request, 'home.html')
 
