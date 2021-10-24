@@ -3,6 +3,10 @@ from django.core.validators import RegexValidator
 from django.forms import widgets
 from microblogs.models import Post, User
 
+class LogInForm(forms.Form):
+    username = forms.CharField(label="Username")
+    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
