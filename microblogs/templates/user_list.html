@@ -5,7 +5,8 @@
   <body>
     <h1>User List</h1>
     {% for user in users %}
-      <p><b>{{ user }}</b></p>
+      <a href="{% url "show_user" user.id %}">{{ user.username }}</a>
+      <br>
     {% endfor %}
   </body>
 </html>
