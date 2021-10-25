@@ -4,8 +4,11 @@
   </head>
   <body>
     <h1>Feed</h1>
+    {% for message in messages %}
+      <p>{{ message }}<p>
+    {% endfor %}
     <p>Make a Cluck</p>
-    <form action="#", method="post">
+    <form action="{% url "new_post" %}", method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Post">
