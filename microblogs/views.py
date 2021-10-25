@@ -1,12 +1,17 @@
 from django.contrib import auth
 from django.shortcuts import redirect, render
 from microblogs.forms import LogInForm, PostForm, SignUpForm
+from microblogs.models import User
 
 from django.contrib import messages
 
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
+
+def user_list(request):
+    users = User.objects.all()
+    return render(request, "user_list.html", {"users": users})
 
 def feed(request):
     form = PostForm()
