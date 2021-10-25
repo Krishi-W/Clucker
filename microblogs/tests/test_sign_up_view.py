@@ -1,9 +1,9 @@
 from django.test import TestCase
-from microblogs.forms import SignUpForm
-from django.urls import reverse
-from microblogs.models import User
 from django.contrib.auth.hashers import check_password
+from django.urls import reverse
 
+from microblogs.forms import SignUpForm
+from microblogs.models import User
 from microblogs.tests.helpers import LogInTester
 
 class SignUpViewTestCase(TestCase, LogInTester):

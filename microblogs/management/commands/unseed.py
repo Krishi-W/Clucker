@@ -1,6 +1,5 @@
-from django.core.management.base import BaseCommand, CommandError
-from faker import Faker
-from ...models import User
+from django.core.management.base import BaseCommand
+from microblogs.models import User
 
 class Command(BaseCommand):
     help = "Unseeds the database, removing all users except superusers"

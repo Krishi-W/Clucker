@@ -1,8 +1,9 @@
 from django.test import TestCase
-from microblogs.forms import SignUpForm
-from microblogs.models import User
 from django import forms
 from django.contrib.auth.hashers import check_password
+
+from microblogs.forms import SignUpForm
+from microblogs.models import User
 
 class SignUpFormTestCase(TestCase):
     def setUp(self):

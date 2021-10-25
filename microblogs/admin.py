@@ -1,6 +1,7 @@
 """Configuration of the admin interface for microblogs"""
 from django.contrib import admin
-from .models import Post, User
+
+from microblogs.models import Post, User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):

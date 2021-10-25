@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import RegexValidator
-from django.forms import widgets
+
 from microblogs.models import Post, User
 
 class LogInForm(forms.Form):

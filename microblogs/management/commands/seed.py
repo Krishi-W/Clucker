@@ -1,6 +1,6 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from faker import Faker
-from ...models import User
+from microblogs.models import User
 
 class Command(BaseCommand):
     help = "Seeds the database with 100 random users"

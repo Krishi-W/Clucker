@@ -3,7 +3,6 @@ from django.test import TestCase
 from django.urls import reverse
 
 from microblogs.models import User
-
 from microblogs.tests.helpers import LogInTester
 
 class LogOutViewTestCase(TestCase, LogInTester):

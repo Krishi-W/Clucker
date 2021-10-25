@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from microblogs.forms import PostForm
 
 class PostFormTestCase(TestCase):

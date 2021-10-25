@@ -1,11 +1,10 @@
 from django.contrib import auth
 from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+
 from microblogs.forms import LogInForm, PostForm, SignUpForm
 from microblogs.models import Post, User
-
-from django.contrib import messages
-
-from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 

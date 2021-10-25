@@ -1,10 +1,9 @@
 from django.test import TestCase
-from microblogs.forms import LogInForm
+from django.contrib import messages
 from django.urls import reverse
 
+from microblogs.forms import LogInForm
 from microblogs.models import User
-from django.contrib import messages
-
 from microblogs.tests.helpers import LogInTester
 
 class LogInViewTestCase(TestCase, LogInTester):
