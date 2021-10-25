@@ -9,6 +9,13 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
+def show_user(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        user = None
+    return render(request, "show_user.html", {"user": user})
+
 def user_list(request):
     users = User.objects.all()
     return render(request, "user_list.html", {"users": users})
