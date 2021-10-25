@@ -1,13 +1,28 @@
 from django.contrib import auth
 from django.shortcuts import redirect, render
 from microblogs.forms import LogInForm, PostForm, SignUpForm
-from microblogs.models import User
+from microblogs.models import Post, User
 
 from django.contrib import messages
 
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
+
+def new_post(request):
+    if request.method == "POST" and request.user.is_authenticated:
+        form = PostForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data.get("text")
+            Post(author=request.user, text=text).save()
+            messages.add_message(request, messages.SUCCESS, "Post created successfully")
+            return redirect("feed")
+        else:
+            messages.add_message(request, messages.ERROR, "Invalid form data")
+            render(request, "feed.html", {"form": PostForm()})
+    else:
+        messages.add_message(request, messages.ERROR, "You need to be logged in to make a post")
+    return redirect("home")
 
 def show_user(request, user_id):
     try:
