@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for x in range(100):
-            username = self.faker.unique.name()
+            username = "@" + str(self.faker.unique.random_int(min=0, max=10000)) + self.faker.random_lowercase_letter() +  self.faker.random_uppercase_letter()
             first_name = self.faker.first_name()
             last_name = self.faker.last_name()
             email = self.faker.unique.email()
