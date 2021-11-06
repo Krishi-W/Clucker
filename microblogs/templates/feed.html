@@ -1,16 +1,18 @@
-<html>
-  <head>
-    <title>Clucker</title>
-  </head>
-  <body>
-    <h1>Feed</h1>
-    {% for message in messages %}
-      <p>{{ message }}<p>
-    {% endfor %}
-    <p>Make a Cluck</p>
-    <form action="{% url "new_post" %}", method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Post">
-  </body>
-</html>
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 offset-md-3">
+      <h1>Feed</h1>
+      {% for message in messages %}
+        <p>{{ message }}<p>
+      {% endfor %}
+      <p>Make a Cluck</p>
+      <form action="{% url "new_post" %}", method="post">
+      {% csrf_token %}
+      {% include "partials/bootstrap_form.html" %}
+      <input type="submit" value="Post" class="btn btn-primary">
+    </div>
+  </div>
+</div>
+{% endblock %}
