@@ -1,5 +1,7 @@
 asgiref==3.4.1
+coverage==6.1.1
 Django==3.2.8
+django-widget-tweaks==1.4.9
 Faker==9.2.0
 jedi==0.17.2
 parso==0.7.1
