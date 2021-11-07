@@ -92,6 +92,14 @@ ul.errorlist {
   width: 120px;
   clear:both;
   float:left;
+  border-radius: 50%;
+}
+
+.small-image {
+  width: 50px;
+  clear:both;
+  float:left;
+  border-radius: 50%;
 }
 
 .profile-text {
@@ -101,6 +109,7 @@ ul.errorlist {
 
 h3.profile-title {
   margin-bottom: 0px;
+  float:left;
 }
 
 .profile-username {

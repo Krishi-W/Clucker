@@ -11,6 +11,7 @@ User List
         <tbody>
           {% for user in users %}
             <tr>
+              <td><img src="{{ user.gravatar }}" class="small-image"></td>
               <td><a href="{% url "show_user" user.id %}">{{ user.username }}</a></td>
               <td>{{ user.first_name }}</td>
               <td>{{ user.last_name }}</td>

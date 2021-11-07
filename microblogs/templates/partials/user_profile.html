@@ -1,0 +1,22 @@
+<div class="container">
+    {% if user %}
+    <div class="row">
+        <div class="col col-auto">
+            <img src="{{ user.gravatar }}" class="profile-image">
+        </div>
+        <div class="col">
+            <h1 class="text-light profile-title">{{ user.first_name }} {{ user.last_name }}</p>
+            <h6 class="text-light profile-username">{{ user.username }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p class="text-light profile-bio">{{ user.bio }}</p>
+        </div>
+    </div>
+    {% else %}
+        <div class="col">
+            <p class="text-light"><b>User not found</b></p>
+        </div>
+    {% endif %}
+</div>

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 
+from libgravatar import Gravatar
+
 class User(AbstractUser):
     username = models.CharField(
         max_length=30,
@@ -33,6 +35,12 @@ class User(AbstractUser):
         max_length=520,
         blank=True
     )
+
+    def gravatar(self, size=120):
+        """Return a URL to the user's gravatar."""
+        gravatar_object = Gravatar(self.email)
+        gravatar_url = gravatar_object.get_image(size=size, default='mp')
+        return gravatar_url
 
 class Post(models.Model):
     author = models.ForeignKey(
