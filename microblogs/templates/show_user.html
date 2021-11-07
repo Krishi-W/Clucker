@@ -1,17 +1,19 @@
-<html>
-  <head>
-    <title>Clucker</title>
-  </head>
-  <body>
-    <h1>User Details</h1>
-    {% if user %}
-      <p>Username: <b>{{ user.username }}</p></b>
-      <p>First name: <b>{{ user.first_name }}</p></b>
-      <p>Last name: <b>{{ user.last_name }}</p></b>
-      <p>Email: <b>{{ user.email }}</p></b>
-      <p>Bio: <b>{{ user.bio }}</p></b>
-    {% else %}
-      <p><b>User not found</p></b>
-    {% endif %}
-  </body>
-</html>
+{% extends 'base_content.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 offset-md-3">
+      <h1 class="text-light">User Details</h1>
+      {% if user %}
+        <p class="text-light">Username: <b>{{ user.username }}</p></b>
+        <p class="text-light">First name: <b>{{ user.first_name }}</p></b>
+        <p class="text-light">Last name: <b>{{ user.last_name }}</p></b>
+        <p class="text-light">Email: <b>{{ user.email }}</p></b>
+        <p class="text-light">Bio: <b>{{ user.bio }}</p></b>
+      {% else %}
+        <p><b>User not found</p></b>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

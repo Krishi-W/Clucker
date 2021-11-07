@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
 {% for field in form%}
     <div class="mb-3">
-    {{ field.label_tag }}
+    <p class="text-light">{{ field.label_tag }}</p>
     {% if form.is_bound %}
         {% if field.errors %}
             {% render_field field class="form-control is-invalid" %}
