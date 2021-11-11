@@ -11,18 +11,5 @@
             "bio": "The quick brown fox jumps over the lazy dog",
             "is_active": true
         }
-    },
-    {
-        "model": "microblogs.user",
-        "pk": 2,
-        "fields": {
-            "username": "@janedoe",
-            "first_name": "Jane",
-            "last_name": "Doe",
-            "email": "janedoe@example.org",
-            "password": "pbkdf2_sha256$260000$OX1fDadeZSxRR2jHjL84nm$8RdfGQCAAwWC9cmdPaeN2BGRVB7JqjdxDxO81UDwl2Q=",
-            "bio": "This is Jane's profile.",
-            "is_active": true
-        }
     }
 ]

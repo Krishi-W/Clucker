@@ -5,7 +5,10 @@ from microblogs.models import User
 from microblogs.models import Post
 
 class PostModelTestCase(TestCase):
-    fixtures = ["microblogs/tests/fixtures/default_user.json"]
+    fixtures = [
+        "microblogs/tests/fixtures/default_user.json",
+        "microblogs/tests/fixtures/other_default_user.json"
+    ]
 
     def setUp(self):
         self.userJohn = User.objects.get(username="@johndoe")

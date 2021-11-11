@@ -7,6 +7,8 @@ from microblogs.models import User
 from microblogs.tests.helpers import LogInTester
 
 class SignUpViewTestCase(TestCase, LogInTester):
+    fixtures = ["microblogs/tests/fixtures/default_user.json"]
+
     def setUp(self):
         self.url = reverse("sign_up")
         self.form_input = {
@@ -19,6 +21,8 @@ class SignUpViewTestCase(TestCase, LogInTester):
             "password_confirmation": "Password123"
         }
 
+        self.userJohn = User.objects.get(username="@johndoe")
+
     def test_sign_up_url(self):
         self.assertEqual(self.url, "/sign_up/")
 
@@ -29,6 +33,13 @@ class SignUpViewTestCase(TestCase, LogInTester):
         form = response.context["form"]
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertFalse(form.is_bound)
+
+    def test_get_sign_up_redirects_when_logged_in(self):
+        self.client.login(username=self.userJohn.username, password="Password123")
+        response = self.client.get(self.url, follow=True)
+        redirect_url = reverse("feed")
+        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
+        self.assertTemplateUsed(response, "feed.html")
 
     def test_unsuccessful_sign_up(self):
         self.form_input["username"] = "BAD_USERNAME"
@@ -58,3 +69,13 @@ class SignUpViewTestCase(TestCase, LogInTester):
         self.assertEqual(user.bio, "My bio")
         self.assertTrue(check_password("Password123", user.password))
         self.assertTrue(self._is_logged_in());
+
+    def test_post_log_in_redirects_when_logged_in(self):
+        self.client.login(username=self.userJohn.username, password="Password123")
+        before_count = User.objects.count()
+        response = self.client.post(self.url, self.form_input, follow=True)
+        after_count = User.objects.count()
+        self.assertEqual(before_count, after_count)
+        redirect_url = reverse("feed")
+        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
+        self.assertTemplateUsed(response, "feed.html")
