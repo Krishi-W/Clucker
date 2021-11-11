@@ -26,24 +26,24 @@ class PostModelTestCase(TestCase):
     def test_multiple_posts_can_have_same_author(self):
         post = self._create_second_post()
         self.post.author = post.author
-        self._assert_post_is_valid
+        self._assert_post_is_valid()
 
     def test_author_cannot_be_blank(self):
         self.post.author = None
-        self._assert_post_is_invalid
+        self._assert_post_is_invalid()
 
     def test_text_has_length_no_longer_than_280_chars(self):
         self.post.text = "x" * 281
-        self._assert_post_is_invalid
+        self._assert_post_is_invalid()
 
     def test_text_is_not_blank(self):
         self.post.text = ""
-        self._assert_post_is_invalid
+        self._assert_post_is_invalid()
 
     def test_text_may_already_exist(self):
         post = self._create_second_post()
         self.post.text = post.text
-        self._assert_post_is_valid
+        self._assert_post_is_valid()
 
     def _assert_post_is_valid(self):
         try:
