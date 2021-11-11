@@ -4,18 +4,11 @@ from django.urls import reverse
 from microblogs.models import Post, User
 
 class NewPostViewTestCase(TestCase):
+    fixtures = ["microblogs/tests/fixtures/default_user.json"]
+
     def setUp(self):
         self.url = reverse("new_post")
-        self.user = User.objects.create_user(
-            '@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog',
-            is_active=True
-        )
-        self.user.save()
+        self.user = User.objects.get(username="@johndoe")
 
     def test_new_post_url(self):
         self.assertEqual(self.url, "/new_post/")

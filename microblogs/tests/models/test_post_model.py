@@ -5,18 +5,14 @@ from microblogs.models import User
 from microblogs.models import Post
 
 class PostModelTestCase(TestCase):
+    fixtures = ["microblogs/tests/fixtures/default_user.json"]
+
     def setUp(self):
-        self.user = User.objects.create_user(
-            '@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog'
-        )
+        self.userJohn = User.objects.get(username="@johndoe")
+        self.userJane = User.objects.get(username="@janedoe")
 
         self.post = Post(
-            author=self.user,
+            author=self.userJohn,
             text="The first ever cluck!"
         )
 
@@ -24,7 +20,7 @@ class PostModelTestCase(TestCase):
         self._assert_post_is_valid()
 
     def test_post_is_deleted_if_author_is_deleted(self):
-        self.user.delete()
+        self.userJohn.delete()
         self._assert_post_is_invalid()
 
     def test_multiple_posts_can_have_same_author(self):
@@ -59,23 +55,9 @@ class PostModelTestCase(TestCase):
         with self.assertRaises(ValidationError):
             self.post.full_clean()
 
-    def _create_second_user(self):
-        user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='janedoe@example.org',
-            password='Password123',
-            bio='This is Jane\'s profile.'
-        )
-
-        return user
-
     def _create_second_post(self):
-        user = self._create_second_user()
-
         post = Post(
-            author=user,
+            author=self.userJane,
             text="The second ever cluck!"
         )
 

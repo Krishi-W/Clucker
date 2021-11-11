@@ -4,6 +4,8 @@ from django.urls import reverse
 from microblogs.models import User
 
 class UserListViewTestCase(TestCase):
+    fixtures = ["microblogs/tests/fixtures/default_user.json"]
+
     def setUp(self):
         self.url = reverse("user_list")
 
@@ -25,12 +27,4 @@ class UserListViewTestCase(TestCase):
         self.assertEqual(set(response.context["users"]), set(User.objects.all()))
 
     def _setUpUser(self):
-        User.objects.create_user(
-            '@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog',
-            is_active=True
-        ).save()
+        User.objects.get(username="@johndoe")

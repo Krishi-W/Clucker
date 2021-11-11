@@ -4,14 +4,16 @@ from django.urls import reverse
 from microblogs.models import User
 
 class ShowUserViewTestCase(TestCase):
+    fixtures = ["microblogs/tests/fixtures/default_user.json"]
+
     def setUp(self):
-        self.user = self._setUpUser()
+        self.user = User.objects.get(username="@johndoe")
         self.url = reverse("show_user", kwargs={"user_id": 1})
-        self.url2 = reverse("show_user", kwargs={"user_id": 2})
+        self.url2 = reverse("show_user", kwargs={"user_id": 3})
 
     def test_show_user_url(self):
         self.assertEqual(self.url, "/user/1")
-        self.assertEqual(self.url2, "/user/2")
+        self.assertEqual(self.url2, "/user/3")
 
     def test_get_show_user(self):
         response = self.client.get(self.url)
@@ -25,16 +27,3 @@ class ShowUserViewTestCase(TestCase):
     def test_case_when_id_is_incorrect(self):
         response = self.client.get(self.url2)
         self.assertIsNone(response.context["user"])
-
-    def _setUpUser(self):
-        user = User.objects.create_user(
-            '@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog',
-            is_active=True
-        )
-        user.save()
-        return user
