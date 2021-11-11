@@ -37,6 +37,7 @@ def user_list(request):
     users = User.objects.all()
     return render(request, "user_list.html", {"users": users})
 
+@login_required
 def feed(request):
     form = PostForm()
     return render(request, 'feed.html', {"form": form})
