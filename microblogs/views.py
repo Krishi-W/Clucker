@@ -24,6 +24,7 @@ def new_post(request):
         messages.add_message(request, messages.ERROR, "You need to be logged in to make a post")
     return redirect("home")
 
+@login_required
 def show_user(request, user_id):
     try:
         user = User.objects.get(id=user_id)
