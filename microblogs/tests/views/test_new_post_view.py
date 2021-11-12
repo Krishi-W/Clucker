@@ -19,7 +19,8 @@ class NewPostViewTestCase(TestCase):
             "text": ""
         }
         response = self.client.post(self.url, form_input, follow=True)
-        self.assertRedirects(response, reverse("home"), status_code=302, target_status_code=200)
+        self.assertRedirects(response, reverse("feed"), status_code=302, target_status_code=200)
+        self.assertTemplateUsed(response, "feed.html")
 
     def test_new_post_with_invalid_form_and_not_logged_in(self):
         form_input = {

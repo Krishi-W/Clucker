@@ -24,10 +24,9 @@ def new_post(request):
             text = form.cleaned_data.get("text")
             Post(author=request.user, text=text).save()
             messages.add_message(request, messages.SUCCESS, "Post created successfully")
-            return redirect("feed")
         else:
             messages.add_message(request, messages.ERROR, "Invalid form data")
-            render(request, "feed.html", {"form": PostForm()})
+        return redirect("feed")
     else:
         messages.add_message(request, messages.ERROR, "You need to be logged in to make a post")
     return redirect("home")
@@ -72,6 +71,7 @@ def log_out(request):
     logout(request)
     return redirect("home")
 
+@login_prohibited
 def home(request):
     return render(request, 'home.html')
 
