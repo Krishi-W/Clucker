@@ -6,16 +6,9 @@ from django.contrib.auth.decorators import login_required
 from microblogs.forms import LogInForm, PostForm, SignUpForm
 from microblogs.models import Post, User
 
+from microblogs.helpers import login_prohibited
+
 # Create your views here.
-
-def login_prohibited(view_function):
-    def wrapper(request):
-        if request.user.is_authenticated:
-            return redirect("feed")
-
-        return view_function(request)
-
-    return wrapper
 
 def new_post(request):
     if request.method == "POST" and request.user.is_authenticated:
