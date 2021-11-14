@@ -42,7 +42,8 @@ def user_list(request):
 @login_required
 def feed(request):
     form = PostForm()
-    return render(request, 'feed.html', {"form": form})
+    posts = Post.objects.filter(author=request.user)
+    return render(request, 'feed.html', {"form": form, "posts": posts})
 
 @login_prohibited
 def log_in(request):

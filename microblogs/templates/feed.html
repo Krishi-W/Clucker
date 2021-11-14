@@ -13,6 +13,9 @@ Feed
       {% include "partials/bootstrap_form.html" %}
       <input type="submit" value="Post" class="btn btn-primary">
     </div>
+    <div class="col-sm-12 col-md-6 offset-md-3">
+      {% include "partials/posts_as_table.html" with posts=posts%}
+    </div>
   </div>
 </div>
 {% endblock %}
