@@ -1,11 +1,14 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from microblogs.models import User
+from microblogs.models import Post, User
 from microblogs.tests.helpers import reverse_with_next
 
 class ShowUserViewTestCase(TestCase):
-    fixtures = ["microblogs/tests/fixtures/default_user.json"]
+    fixtures = [
+        "microblogs/tests/fixtures/default_user.json",
+        "microblogs/tests/fixtures/other_default_user.json"
+    ]
 
     def setUp(self):
         self.user = User.objects.get(username="@johndoe")
@@ -34,5 +37,24 @@ class ShowUserViewTestCase(TestCase):
 
     def test_case_when_id_is_incorrect(self):
         self.client.login(username=self.user.username, password="Password123")
-        response = self.client.get(self.url2)
-        self.assertIsNone(response.context["user"])
+        response = self.client.get(self.url2, follow=True)
+        redirect_url = reverse("user_list")
+        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
+
+    def test_show_user_displays_posts_belonging_to_the_shown_user_only(self):
+        self.client.login(username=self.user.username, password="Password123")
+        other_user = User.objects.get(username="@janedoe")
+        create_posts(other_user, 100, 103)
+        create_posts(self.user, 200, 203)
+        url = reverse("show_user", kwargs={"user_id": other_user.id})
+        response = self.client.get(url)
+        for count in range(100, 103):
+            self.assertContains(response, f"Post_{count}")
+        for count in range(200, 203):
+            self.assertNotContains(response, f"Post_{count}")
+
+def create_posts(author, from_count, to_count):
+    for count in range(from_count, to_count):
+        text = f"Post_{count}"
+        post = Post(author=author, text=text)
+        post.save()

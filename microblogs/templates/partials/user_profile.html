@@ -1,28 +1,20 @@
-{% if user %}
-    <div class="row content">
-        <div class="col-12">
-            <img src="{{ user.gravatar }}" class="profile-image">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="text-light profile-title">{{ user.first_name }} {{ user.last_name }}</h3>
-                </div>
+<div class="row content">
+    <div class="col-12">
+        <img src="{{ user.gravatar }}" class="profile-image">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-light profile-title">{{ user.first_name }} {{ user.last_name }}</h3>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <p class="text-light profile-username">{{ user.username }}</p>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-light profile-username">{{ user.username }}</p>
             </div>
         </div>
     </div>
-    <div class="row content">
-        <div class="col-12">
-            <p class="text-light profile-bio">{{ user.bio }}</p>
-        </div>
+</div>
+<div class="row content">
+    <div class="col-12">
+        <p class="text-light profile-bio">{{ user.bio }}</p>
     </div>
-{% else %}
-    <div class="row">
-        <div class="col-12">
-            <p class="text-light"><b>User not found</b></p>
-        </div>
-    </div>
-{% endif %}
+</div>
